@@ -1,0 +1,76 @@
+﻿<Window x:Class="Notrox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Notrox"
+        mc:Ignorable="d"
+        Title="Notrox Login"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        Background="#0F172A"
+        Icon="../Resources/Notrox.ico">
+
+    <Grid>
+        
+        <!-- Login Card -->
+        <Border Width="360" Background="White" CornerRadius="10" Padding="35" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <StackPanel>
+                <!-- App Title -->
+                <TextBlock Text="NOTROX"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="#0F172A"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,5"/>
+
+                <TextBlock Text="Bejelentkezés"
+                           FontSize="14"
+                           Foreground="Gray"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,25"/>
+
+                <!-- Username -->
+                <TextBlock Text="Felhasználó név"
+                           FontSize="13"
+                           Foreground="#111827"
+                           Margin="0,0,0,5"/>
+                
+                <TextBox Height="36"
+                         Padding="8"
+                         Margin="0,0,0,15"
+                         BorderBrush="#1E3A8A"
+                         BorderThickness="1"
+                         Text="{Binding Username}"/>
+
+                <!-- Password -->
+                <TextBlock Text="Jelszó"
+                           FontSize="13"
+                           Foreground="#111827"
+                           Margin="0,0,0,5"/>
+
+                <PasswordBox Height="36"
+                             Padding="8"
+                             Margin="0,0,0,25"
+                             BorderBrush="#1E3A8A"
+                             BorderThickness="1"
+                             x:Name="PasswordInput"/>
+
+                <!-- Login Button -->
+                <Button Content="Bejelentkezés"
+                        Height="40"
+                        Background="#2B57FF"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=PasswordInput}"/>
+            </StackPanel>
+
+        </Border>
+
+    </Grid>
+</Window>

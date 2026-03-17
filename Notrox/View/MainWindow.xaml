@@ -14,11 +14,9 @@
 
     <Grid>
         
-        <!-- Login Card -->
         <Border Width="360" Background="White" CornerRadius="10" Padding="35" VerticalAlignment="Center" HorizontalAlignment="Center">
 
             <StackPanel>
-                <!-- App Title -->
                 <TextBlock Text="NOTROX"
                            FontSize="28"
                            FontWeight="Bold"
@@ -32,7 +30,6 @@
                            HorizontalAlignment="Center"
                            Margin="0,0,0,25"/>
 
-                <!-- Username -->
                 <TextBlock Text="Felhasználó név"
                            FontSize="13"
                            Foreground="#111827"
@@ -45,7 +42,6 @@
                          BorderThickness="1"
                          Text="{Binding Username}"/>
 
-                <!-- Password -->
                 <TextBlock Text="Jelszó"
                            FontSize="13"
                            Foreground="#111827"
@@ -57,8 +53,7 @@
                              BorderBrush="#1E3A8A"
                              BorderThickness="1"
                              x:Name="PasswordInput"/>
-
-                <!-- Login Button -->
+                
                 <Button Content="Bejelentkezés"
                         Height="40"
                         Background="#2B57FF"

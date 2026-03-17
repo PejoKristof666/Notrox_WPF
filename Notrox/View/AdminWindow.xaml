@@ -12,7 +12,6 @@
         Icon="../Resources/Notrox.ico">
     <Grid>
 
-        <!-- Layout -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
@@ -24,7 +23,6 @@
         </Grid.RowDefinitions>
 
 
-        <!-- SIDEBAR -->
         <Border Grid.RowSpan="2"
             Background="#081225"
             Padding="20"
@@ -33,7 +31,6 @@
     
             <StackPanel>
 
-                <!-- Logo -->
                 <TextBlock Text="NOTROX"
                     Foreground="White"
                     FontSize="22"
@@ -43,7 +40,6 @@
                     Margin="0 0 0 0"/>
                 <Image Source="../Resources/Notrox.png" Height="auto" Width="auto" HorizontalAlignment="Center" Margin="0 -25 0 -30"></Image>
                 
-                <!-- Menu Buttons -->
 
                 <Button Content="Users"
                         Height="40"
@@ -85,7 +81,6 @@
         </Border>
 
 
-        <!-- TOP BAR -->
         <Border Grid.Column="1"
             Background="#081225"
             Padding="20">
@@ -98,7 +93,6 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Search -->
                 <TextBox Width="280"
                      Height="35"
                      Background="#1E293B"
@@ -108,7 +102,6 @@
                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"/>
 
-                <!-- Admin text -->
                 <Button Content="Logout"
                     Grid.Column="2"
                     Height="35"
@@ -132,8 +125,6 @@
 
         </Border>
 
-
-        <!-- MAIN CONTENT -->
         <Border Grid.Row="1"
                 Grid.Column="1"
                 Padding="35">

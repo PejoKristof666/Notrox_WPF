@@ -30,7 +30,6 @@
                            Margin="0,0,0,20"
                            HorizontalAlignment="Center"/>
 
-                <!-- Name -->
                 <TextBlock Text="Product Name"
                            Foreground="White"
                            FontWeight="SemiBold"/>
@@ -38,7 +37,6 @@
                          Margin="0,5,0,15"
                          Height="30"/>
 
-                <!-- Description -->
                 <TextBlock Text="Description"
                            Foreground="White"
                            FontWeight="SemiBold"/>
@@ -46,7 +44,6 @@
                          Margin="0,5,0,15"
                          Height="30"/>
 
-                <!-- Price -->
                 <TextBlock Text="Price"
                            Foreground="White"
                            FontWeight="SemiBold"/>
@@ -54,7 +51,6 @@
                          Margin="0,5,0,15"
                          Height="30"/>
 
-                <!-- Amount -->
                 <TextBlock Text="Stock Amount"
                            Foreground="White"
                            FontWeight="SemiBold"/>
@@ -62,7 +58,6 @@
                          Margin="0,5,0,15"
                          Height="30"/>
 
-                <!-- Image -->
                 <TextBlock Text="Image URL"
                            Foreground="White"
                            FontWeight="SemiBold"/>
@@ -70,7 +65,6 @@
                          Margin="0,5,0,20"
                          Height="30"/>
 
-                <!-- Save Button -->
                 <Button Content="Save Changes"
                         Command="{Binding SaveCommand}"
                         Height="35"

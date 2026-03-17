@@ -10,14 +10,12 @@
 
         <ItemsControl ItemsSource="{Binding ProductsView}" Margin="30">
 
-            <!-- CARD GRID -->
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
 
-            <!-- USER CARD -->
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
 

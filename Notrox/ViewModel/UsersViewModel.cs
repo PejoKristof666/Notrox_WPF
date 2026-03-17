@@ -1,24 +1,33 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Notrox.Interfaces;
 using Notrox.Model;
 using Notrox.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 
 namespace Notrox.ViewModel
 {
-    public class UsersViewModel : ViewModelBase
+    public class UsersViewModel : ViewModelBase, ISearchable
     {
         public ObservableCollection<UsersClass> Users { get; set; } = new();
 
+        public ICollectionView UsersView { get; set; }
+
+        private string _searchText;
+
         public UsersViewModel()
         {
-            LoadUsers();
+            UsersView = CollectionViewSource.GetDefaultView(Users);
+            UsersView.Filter = FilterUsers;
 
+            LoadUsers();
             
             EditAddresses = new RelayCommand<UsersClass>(OpenEditAddressesF);
             DeleteUser = new RelayCommand<UsersClass>(DeleteUserFunction);
@@ -60,6 +69,21 @@ namespace Notrox.ViewModel
             {
                 MessageBox.Show("Failed to delete user.");
             }
+        }
+
+        private bool FilterUsers(object obj)
+        {
+            if (obj is not UsersClass user) return false;
+            if (string.IsNullOrWhiteSpace(_searchText)) return true;
+
+            return user.Username.Contains(_searchText, StringComparison.OrdinalIgnoreCase);
+
+        }
+
+        public void ApplySearch(string text)
+        {
+            _searchText = text;
+            UsersView.Refresh();
         }
     }
 }

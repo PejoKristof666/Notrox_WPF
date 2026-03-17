@@ -9,17 +9,26 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.ComponentModel;
+using System.Windows.Data;
+using Notrox.Interfaces;
 
 namespace Notrox.ViewModel
 {
-    public class ProductsViewModel : ViewModelBase
+    public class ProductsViewModel : ViewModelBase, ISearchable
     {
         public ObservableCollection<ProductsClass> Products { get; set; } = new();
+        public ICollectionView ProductsView { get; set; }
+
+        private string _searchText;
         public RelayCommand<ProductsClass> EditProduct { get; }
         public RelayCommand<ProductsClass> DeleteProduct { get; }
 
         public ProductsViewModel()
         {
+            ProductsView = CollectionViewSource.GetDefaultView(Products);
+            ProductsView.Filter = FilterProducts;
+
             LoadProducts();
 
             EditProduct = new RelayCommand<ProductsClass>(OpenEditProductsF);
@@ -60,6 +69,21 @@ namespace Notrox.ViewModel
             {
                 MessageBox.Show("Failed Delete / Product");
             }
+        }
+
+        private bool FilterProducts(object obj)
+        {
+            if(obj is not ProductsClass product) return false;
+            if(string.IsNullOrWhiteSpace(_searchText)) return true;
+
+            return product.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase) || product.Description.Contains(_searchText, StringComparison.OrdinalIgnoreCase);
+
+        }
+
+        public void ApplySearch(string text)
+        {
+            _searchText = text;
+            ProductsView.Refresh();
         }
     }
 }

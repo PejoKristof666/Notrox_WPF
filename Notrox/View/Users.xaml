@@ -5,7 +5,7 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-        <ItemsControl ItemsSource="{Binding Users}" Margin="30">
+        <ItemsControl ItemsSource="{Binding UsersView}" Margin="30">
 
             <!-- CARD GRID -->
             <ItemsControl.ItemsPanel>

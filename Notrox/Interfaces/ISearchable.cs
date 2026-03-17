@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notrox.Model
+namespace Notrox.Interfaces
 {
-    public class CompanyClass
+    public interface ISearchable
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        void ApplySearch(string text);
     }
 }

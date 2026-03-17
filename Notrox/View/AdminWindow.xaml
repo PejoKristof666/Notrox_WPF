@@ -72,6 +72,14 @@
                         Cursor="Hand"
                         Command="{Binding ShowProducts}"/>
                 
+                <Button Content="Add Product"
+                       Height="40"
+                       Margin="0,6"
+                       Background="#1E293B"
+                       Foreground="White"
+                       BorderThickness="0"
+                       Cursor="Hand"
+                       Command="{Binding AddProduct}"/>
             </StackPanel>
 
         </Border>
@@ -97,7 +105,7 @@
                      Foreground="White"
                      BorderThickness="0"
                      Padding="10"
-                     Text=""
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"/>
 
                 <!-- Admin text -->

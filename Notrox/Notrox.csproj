@@ -6,11 +6,16 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Notrox.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\Notrox.ico" />
     <None Remove="Resources\Notrox.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Notrox.ico" />
   </ItemGroup>
 
   <ItemGroup>

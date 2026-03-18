@@ -14,6 +14,18 @@ namespace Notrox.Model
         public string Email { get; set; }
         public string Pfp { get; set; }
 
+        public string PfpFull
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Pfp)) return "https://i.pravatar.cc/150";
+
+                if (Pfp.StartsWith("http")) return Pfp;
+
+                return "https://notrox.hu" + Pfp;
+            }
+        }
+
         [JsonIgnore]
         public bool isAdmin { get; set; }
 

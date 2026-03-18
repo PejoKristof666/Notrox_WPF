@@ -27,8 +27,7 @@ namespace Notrox.ViewModel
 
         private async Task Login(object param)
         {
-            if (param is not PasswordBox passwordBox)
-                return;
+            if (param is not PasswordBox passwordBox) return;
 
             string password = passwordBox.Password;
 
@@ -36,16 +35,14 @@ namespace Notrox.ViewModel
 
             if (!success)
             {
-                MessageBox.Show("Hibás felhasználónév vagy jelszó.");
-                return;
+                MessageBox.Show("Hibás felhasználónév vagy jelszó."); return;
             }
 
             var user = await App.Server.GetCurrentUser();
 
             if (user == null)
             {
-                MessageBox.Show("Nincs admin jogosultságod!");
-                return;
+                MessageBox.Show("Nincs admin jogosultságod!"); return;
             }
 
             Session.SetUsername = user.Username;

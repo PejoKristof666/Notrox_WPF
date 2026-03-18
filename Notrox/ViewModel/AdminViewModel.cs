@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows.Data;
 using Notrox.Interfaces;
+using System.Windows.Input;
+using Microsoft.Win32;
+using System.Windows;
+using System.IO;
 
 namespace Notrox.ViewModel
 
@@ -28,7 +32,7 @@ namespace Notrox.ViewModel
         public RelayCommand ShowOrders { get; }
         public RelayCommand ShowProducts { get; }
         public RelayCommand AddProduct { get; }
-
+        public RelayCommand SaveToCSV { get; }
         public AdminViewModel()
         {
             ShowUsers = new RelayCommand(() => { CurrentView = new UsersViewModel(); ApplySearchToCurrent(); });
@@ -38,6 +42,8 @@ namespace Notrox.ViewModel
             CurrentView = new UsersViewModel();
 
             AddProduct = new RelayCommand(OpenAddProductWindowF);
+
+            SaveToCSV = new RelayCommand(SaveToCSVFunction);
         }
 
         private void OpenAddProductWindowF()
@@ -50,6 +56,55 @@ namespace Notrox.ViewModel
         {
             if(CurrentView is ISearchable searchable) searchable.ApplySearch(SearchText);
         }
+
+        private void SaveToCSVFunction()
+        {
+            if (CurrentView is not UsersViewModel usersVM)
+            {
+                MessageBox.Show("You must be on the Users page to export CSV."); return;
+            }
+
+            var dialog = new SaveFileDialog
+            {
+                FileName = $"users_{DateTime.Now:yyyyMMdd_HHmmss}",
+                DefaultExt = ".txt",
+                Filter = "Text files (*.txt)|*.txt"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                var csv = ConvertToCsv(usersVM.Users);
+                File.WriteAllText(dialog.FileName, csv);
+            }
+        }
+
+        private string ConvertToCsv(IEnumerable<UsersClass> users)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("ID,Username,Email");
+
+            foreach (var user in users)
+            {
+                sb.AppendLine($"{user.Id},{Escape(user.Username)},{Escape(user.Email)}");
+            }
+
+            return sb.ToString();
+        }
+
+        private string Escape(string value)
+        {
+            if (string.IsNullOrEmpty(value)) return "";
+
+            if (value.Contains(",") || value.Contains("\""))
+            {
+                value = value.Replace("\"", "\"\""); 
+                return $"\"{value}\"";
+            }
+
+            return value;
+        }
+
         public string AdminName => Session.SetUsername;
     }
 }

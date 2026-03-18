@@ -38,6 +38,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0 0 0 0"/>
+                
                 <Image Source="../Resources/Notrox.png" Height="auto" Width="auto" HorizontalAlignment="Center" Margin="0 -25 0 -30"></Image>
                 
 
@@ -69,13 +70,22 @@
                         Command="{Binding ShowProducts}"/>
                 
                 <Button Content="Add Product"
-                       Height="40"
-                       Margin="0,6"
-                       Background="#1E293B"
-                       Foreground="White"
-                       BorderThickness="0"
-                       Cursor="Hand"
-                       Command="{Binding AddProduct}"/>
+                        Height="40"
+                        Margin="0,6"
+                        Background="#1E293B"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Command="{Binding AddProduct}"/>
+
+                <Button Content="Save Users (CSV)"
+                        Height="40"
+                        Margin="0,6"
+                        Background="#1E293B"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Command="{Binding SaveToCSV}"/>
             </StackPanel>
 
         </Border>
@@ -93,6 +103,13 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
+                <TextBlock Text="Search:"
+                    
+                    Foreground="#94A3B8"
+                    FontWeight="SemiBold"
+                    VerticalAlignment="Center"
+                    Margin="550,0,10,0"/>
+
                 <TextBox Width="280"
                      Height="35"
                      Background="#1E293B"
@@ -108,26 +125,24 @@
                     Width="80"
                     Margin="10,0,0,0"
                     Background="#1E293B"
-                    Foreground="White"
+                    Foreground="Red"
                     BorderThickness="0"
                     Cursor="Hand"
                     VerticalAlignment="Center"
                     Click="Logout"/>
-                
+
                 <TextBlock Grid.Column="1"
-                       Text="{Binding AdminName, StringFormat=Admin: {0}}"
-                       Foreground="White"
-                       VerticalAlignment="Center"
-                       FontWeight="Bold"
-                       Margin="20,0,0,0"/>
+                    Text="{Binding AdminName, StringFormat=Admin: {0}}"
+                    Foreground="Cyan"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="20,0,0,0"/>
                 
             </Grid>
 
         </Border>
 
-        <Border Grid.Row="1"
-                Grid.Column="1"
-                Padding="35">
+        <Border Grid.Row="1" Grid.Column="1" Padding="35">
 
             <ContentControl Content="{Binding CurrentView}"/>
 

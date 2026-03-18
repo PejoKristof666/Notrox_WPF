@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Notrox.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <ScrollViewer VerticalScrollBarVisibility="Auto">
 
         <ItemsControl ItemsSource="{Binding ProductsView}" Margin="30">
@@ -27,6 +28,11 @@
 
                         <StackPanel HorizontalAlignment="Center">
 
+                            <Image Source="{Binding IMGURL}"
+                                   Width="100"
+                                   Height="100"
+                                   Margin="0 0 0 10"/>
+                            
                             <TextBlock Text="{Binding Name}"
                                    Foreground="White"
                                    FontWeight="Bold"

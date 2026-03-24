@@ -17,17 +17,20 @@ namespace Notrox.Services
     public class ServerConnection
     {
         private readonly HttpClient _httpClient;
-        string Token = null;
-        public ServerConnection(string baseUrl)
-        {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(baseUrl);
-        }
-
         private readonly JsonSerializerOptions options = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         };
+
+        private string? Token;
+
+        public ServerConnection(string baseUrl)
+        {
+            if (!baseUrl.StartsWith("https://")) throw new Exception("Insecure connection not allowed");
+
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri(baseUrl);
+        }
 
         public async Task<bool> Login(string username, string password)
         {
@@ -40,19 +43,21 @@ namespace Notrox.Services
                 };
 
                 string jsonString = JsonSerializer.Serialize(jsonData);
-
                 StringContent content = new(jsonString, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await _httpClient.PostAsync("/UserLogin", content);
-
                 response.EnsureSuccessStatusCode();
 
                 string json = await response.Content.ReadAsStringAsync();
-
                 Message message = JsonSerializer.Deserialize<Message>(json, options);
 
                 if (message == null || string.IsNullOrEmpty(message.token))
+                {
+                    Token = null;
+                    _httpClient.DefaultRequestHeaders.Authorization = null;
                     return false;
+                }
+
 
                 Token = message.token;
 
@@ -63,14 +68,36 @@ namespace Notrox.Services
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Token = null;
+                _httpClient.DefaultRequestHeaders.Authorization = null;
                 return false;
             }
         }
 
-        /// <summary>
-        //------------------------------------------------------------------------------------------//
-        /// </summary>
-        /// <returns></returns>
+        public void Logout()
+        {
+            Token = null;
+            _httpClient.DefaultRequestHeaders.Authorization = null;
+        }
+
+        public async Task<UsersClass?> GetCurrentUser()
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync("/getUser");
+
+                if (!response.IsSuccessStatusCode)
+                    return null;
+
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<UsersClass>(json, options);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
 
         public async Task<List<UsersClass>> ListUsers()
         {
@@ -79,11 +106,9 @@ namespace Notrox.Services
             try
             {
                 HttpResponseMessage response = await _httpClient.GetAsync("/getAllUsers");
-
                 response.EnsureSuccessStatusCode();
 
                 string json = await response.Content.ReadAsStringAsync();
-
                 DataOfUsers = JsonSerializer.Deserialize<List<UsersClass>>(json, options) ?? new();
             }
             catch (Exception ex)
@@ -92,6 +117,22 @@ namespace Notrox.Services
             }
 
             return DataOfUsers;
+        }
+
+        public async Task<bool> DeleteUser(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _httpClient.DeleteAsync($"/deleteUser/{id}");
+                response.EnsureSuccessStatusCode();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
         }
 
         public async Task<List<ProductsClass>> ListProducts()
@@ -104,7 +145,6 @@ namespace Notrox.Services
                 response.EnsureSuccessStatusCode();
 
                 string json = await response.Content.ReadAsStringAsync();
-
                 DataOfProducts = JsonSerializer.Deserialize<List<ProductsClass>>(json, options) ?? new();
             }
             catch
@@ -114,11 +154,6 @@ namespace Notrox.Services
 
             return DataOfProducts;
         }
-
-        /// <summary>
-        //------------------------------------------------------------------------------------------//
-        /// </summary>
-        /// <returns></returns>
 
         public async Task<bool> AddProduct(string Name, string Description, int Price, int Ammount, int CompanyId, string IMGURL)
         {
@@ -138,11 +173,11 @@ namespace Notrox.Services
                 StringContent infoToSend = new(JsonString, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await _httpClient.PostAsync("/postproduct", infoToSend);
-
                 response.EnsureSuccessStatusCode();
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return false;
             }
 
@@ -166,11 +201,11 @@ namespace Notrox.Services
                 StringContent infoToSend = new(JsonString, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await _httpClient.PutAsync($"/updateproduct/{Id}", infoToSend);
-
                 response.EnsureSuccessStatusCode();
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return false;
             }
 
@@ -186,75 +221,27 @@ namespace Notrox.Services
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Debug.WriteLine(e.Message);
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
-
-        /// <summary>
-        //------------------------------------------------------------------------------------------//
-        /// </summary>
-        /// <returns></returns>
 
         public async Task<UserAddressesClass> GetUserAddresses(int id)
         {
             try
             {
                 HttpResponseMessage response = await _httpClient.GetAsync($"/getUserAddresses/{id}");
-
                 response.EnsureSuccessStatusCode();
 
                 string json = await response.Content.ReadAsStringAsync();
-
                 return JsonSerializer.Deserialize<UserAddressesClass>(json, options);
             }
             catch
             {
                 return new UserAddressesClass();
             }
-        }
-
-        public async Task<bool> DeleteUser(int id)
-        {
-            try
-            {
-                HttpResponseMessage response = await _httpClient.DeleteAsync($"/deleteUser/{id}");
-
-                response.EnsureSuccessStatusCode();
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public async Task<UsersClass?> GetCurrentUser()
-        {
-            try
-            {
-                HttpResponseMessage response = await _httpClient.GetAsync("/getUser");
-
-                if (!response.IsSuccessStatusCode)
-                    return null;
-
-                string json = await response.Content.ReadAsStringAsync();
-
-                return JsonSerializer.Deserialize<UsersClass>(json, options);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public void Logout()
-        {
-            Token = null;
-            _httpClient.DefaultRequestHeaders.Authorization = null;
         }
 
         public async Task<bool> EditAddress(string City, int Zip, string Address1)
@@ -272,14 +259,12 @@ namespace Notrox.Services
                 StringContent content = new(jsonString, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await _httpClient.PutAsync("/EditAddress", content);
-
                 response.EnsureSuccessStatusCode();
 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
                 return false;
             }
         }
@@ -299,7 +284,6 @@ namespace Notrox.Services
                 StringContent content = new(jsonString, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await _httpClient.PutAsync("/EditBillingAddress", content);
-
                 response.EnsureSuccessStatusCode();
 
                 return true;

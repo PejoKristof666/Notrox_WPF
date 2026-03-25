@@ -294,5 +294,50 @@ namespace Notrox.Services
                 return false;
             }
         }
+
+
+        public async Task<List<OrdersClass>> ListOrders()
+        {
+            List<OrdersClass> DataOfOrders = new();
+
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync("/getAllOrders");
+                response.EnsureSuccessStatusCode();
+
+                string json = await response.Content.ReadAsStringAsync();
+                DataOfOrders = JsonSerializer.Deserialize<List<OrdersClass>>(json, options) ?? new();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return DataOfOrders;
+        }
+
+        public async Task<bool> EditOrder(int Id, string Phase)
+        {
+            try
+            {
+                var JsonData = new
+                {
+                    Phase
+                };
+
+                string JsonString = JsonSerializer.Serialize(JsonData);
+                StringContent infoToSend = new(JsonString, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _httpClient.PutAsync($"/updateOrderPhase/{Id}", infoToSend);
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            return true;
+        }
     }
 }

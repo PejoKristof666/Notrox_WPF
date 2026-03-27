@@ -26,7 +26,7 @@ namespace Notrox.Services
 
         public ServerConnection(string baseUrl)
         {
-            if (!baseUrl.StartsWith("https://")) throw new Exception("Insecure connection not allowed");
+            if (!baseUrl.StartsWith("https://")) throw new ArgumentException("Insecure connection not allowed");
 
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri(baseUrl);
@@ -67,7 +67,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex);
                 Token = null;
                 _httpClient.DefaultRequestHeaders.Authorization = null;
                 return false;
@@ -94,7 +94,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex);
                 return null;
             }
         }
@@ -113,7 +113,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex);
             }
 
             return DataOfUsers;
@@ -130,7 +130,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex);
                 return false;
             }
         }
@@ -177,7 +177,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex);
                 return false;
             }
 
@@ -205,7 +205,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex);
                 return false;
             }
 
@@ -223,7 +223,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex);
                 return false;
             }
         }
@@ -290,7 +290,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex);
                 return false;
             }
         }
@@ -310,7 +310,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex);
             }
 
             return DataOfOrders;
@@ -333,7 +333,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex);
                 return false;
             }
 

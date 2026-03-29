@@ -42,7 +42,7 @@
                 <Image Source="../Resources/Notrox.png" Height="auto" Width="auto" HorizontalAlignment="Center" Margin="0 -25 0 -30"></Image>
                 
 
-                <Button Content="Users"
+                <Button Content="Felhasználók"
                         Height="40"
                         Margin="0,6"
                         Background="#1E293B"
@@ -51,7 +51,7 @@
                         Cursor="Hand"
                         Command="{Binding ShowUsers}"/>
 
-                <Button Content="Orders"
+                <Button Content="Rendelések"
                         Height="40"
                         Margin="0,6"
                         Background="#1E293B"
@@ -60,7 +60,7 @@
                         Cursor="Hand"
                         Command="{Binding ShowOrders}"/>
 
-                <Button Content="Products"
+                <Button Content="Termékek"
                         Height="40"
                         Margin="0,6"
                         Background="#1E293B"
@@ -69,7 +69,7 @@
                         Cursor="Hand"
                         Command="{Binding ShowProducts}"/>
                 
-                <Button Content="Add Product"
+                <Button Content="Termék hozzáadása"
                         Height="40"
                         Margin="0,6"
                         Background="#1E293B"
@@ -78,7 +78,7 @@
                         Cursor="Hand"
                         Command="{Binding AddProduct}"/>
 
-                <Button Content="Save Users (CSV)"
+                <Button Content="Felhasználók mentése (CSV)"
                         Height="40"
                         Margin="0,6"
                         Background="#1E293B"
@@ -103,7 +103,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Search:"
+                <TextBlock Text="Keresés:"
                     
                     Foreground="#94A3B8"
                     FontWeight="SemiBold"
@@ -119,7 +119,7 @@
                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"/>
 
-                <Button Content="Logout"
+                <Button Content="Kijelentkezés"
                     Grid.Column="2"
                     Height="35"
                     Width="80"

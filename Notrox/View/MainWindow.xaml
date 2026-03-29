@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notrox"
         mc:Ignorable="d"
-        Title="Notrox Login"
+        Title="Notrox Bejelentkezés"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow"

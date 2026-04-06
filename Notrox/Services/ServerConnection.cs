@@ -86,16 +86,14 @@ namespace Notrox.Services
             {
                 HttpResponseMessage response = await _httpClient.GetAsync("/getUser");
 
-                if (!response.IsSuccessStatusCode)
-                    return null;
+                if (!response.IsSuccessStatusCode) return null;
 
                 string json = await response.Content.ReadAsStringAsync();
                 return JsonSerializer.Deserialize<UsersClass>(json, options);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
-                return null;
+                Debug.WriteLine(ex); return null;
             }
         }
 
@@ -130,8 +128,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
-                return false;
+                Debug.WriteLine(ex); return false;
             }
         }
 
@@ -177,8 +174,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
-                return false;
+                Debug.WriteLine(ex); return false;
             }
 
             return true;
@@ -205,8 +201,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
-                return false;
+                Debug.WriteLine(ex); return false;
             }
 
             return true;
@@ -223,8 +218,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
-                return false;
+                Debug.WriteLine(ex); return false;
             }
         }
 
@@ -290,8 +284,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
-                return false;
+                Debug.WriteLine(ex); return false;
             }
         }
 
@@ -333,8 +326,7 @@ namespace Notrox.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
-                return false;
+                Debug.WriteLine(ex); return false;
             }
 
             return true;

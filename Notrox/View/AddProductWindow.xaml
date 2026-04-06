@@ -79,6 +79,7 @@
 
                 <Button Content="Hozzáadás"
                     Command="{Binding CreateProduct}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                     Height="35"
                     FontWeight="SemiBold"
                     Background="#2E86DE"

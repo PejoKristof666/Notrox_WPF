@@ -26,8 +26,8 @@ namespace Notrox.Model
             }
         }
 
-        [JsonIgnore]
-        public bool isAdmin { get; set; }
+        //[JsonIgnore]
+        public bool? isAdmin { get; set; }
 
     }
 }

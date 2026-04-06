@@ -35,9 +35,9 @@ namespace Notrox.ViewModel
         public RelayCommand SaveToCSV { get; }
         public AdminViewModel()
         {
-            ShowUsers = new RelayCommand(() => { CurrentView = new UsersViewModel(); ApplySearchToCurrent(); });
-            ShowOrders = new RelayCommand(() => { CurrentView = new OrdersViewModel(); ApplySearchToCurrent(); });
-            ShowProducts = new RelayCommand(() => { CurrentView = new ProductsViewModel(); ApplySearchToCurrent(); });
+            ShowUsers = new RelayCommand(() => { SearchText = string.Empty; CurrentView = new UsersViewModel(); ApplySearchToCurrent(); });
+            ShowOrders = new RelayCommand(() => { SearchText = string.Empty; CurrentView = new OrdersViewModel(); ApplySearchToCurrent(); });
+            ShowProducts = new RelayCommand(() => { SearchText = string.Empty; CurrentView = new ProductsViewModel(); ApplySearchToCurrent(); });
 
             CurrentView = new UsersViewModel();
 
@@ -49,7 +49,14 @@ namespace Notrox.ViewModel
         private void OpenAddProductWindowF()
         {
             AddProductWindow window = new AddProductWindow();
-            window.ShowDialog();
+
+            if (window.ShowDialog() == true)
+            {
+                if (CurrentView is ProductsViewModel productsVM)
+                {
+                    productsVM.LoadProducts();
+                }
+            }
         }
 
         private void ApplySearchToCurrent()

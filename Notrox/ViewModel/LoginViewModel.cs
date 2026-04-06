@@ -42,7 +42,14 @@ namespace Notrox.ViewModel
 
             if (user == null)
             {
-                MessageBox.Show("Nincs admin jogosultságod!"); return;
+                MessageBox.Show("Hiba a felhasználó lekérésekor."); return;
+            }
+
+            if (user.isAdmin != true)
+            {
+                MessageBox.Show("Nincs admin jogosultságod!");
+                App.Server.Logout();
+                return;
             }
 
             Session.SetUsername = user.Username;

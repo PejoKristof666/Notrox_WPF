@@ -35,18 +35,18 @@ namespace Notrox.ViewModel
         private string imgurl;
         public string IMGURL { get => imgurl; set { imgurl = value; OnPropertyChanged(); } }
 
-        public ICommand SaveCommand { get; }
+        public RelayCommand<Window> SaveCommand { get; }
 
         public EditProductsViewModel(ProductsClass product)
         {
             _product = product;
 
-            SaveCommand = new RelayCommand(SaveProductEdit);
+            SaveCommand = new RelayCommand<Window>(SaveProductEdit);
 
             LoadProductsInfos();
         }
 
-        private async void SaveProductEdit()
+        private async void SaveProductEdit(Window window)
         {
             try
             {
@@ -55,6 +55,8 @@ namespace Notrox.ViewModel
                 if (updateProduct)
                 {
                     MessageBox.Show("Product updated successfully");
+                    window.DialogResult = true;
+                    window.Close();
                 }
             }
             catch

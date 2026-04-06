@@ -61,6 +61,7 @@
                         FontWeight="Bold"
                         BorderThickness="0"
                         Cursor="Hand"
+                        IsDefault="True"
                         Command="{Binding LoginCommand}"
                         CommandParameter="{Binding ElementName=PasswordInput}"/>
             </StackPanel>

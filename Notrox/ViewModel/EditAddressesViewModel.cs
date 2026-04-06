@@ -1,104 +1,59 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using Notrox;
 using Notrox.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Notrox.ViewModel;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Input;
 
-namespace Notrox.ViewModel
+public class EditAddressesViewModel : ViewModelBase
 {
-    public class EditAddressesViewModel : ViewModelBase
+    private UsersClass _user;
+
+    public string ShippingCity { get; set; }
+    public int ShippingZip { get; set; }
+    public string ShippingAddress { get; set; }
+
+    public string BillingCity { get; set; }
+    public int BillingZip { get; set; }
+    public string BillingAddress { get; set; }
+
+    public EditAddressesViewModel(UsersClass user)
     {
-        private UsersClass _user;
+        _user = user;
+        LoadAddresses();
+    }
 
-        private string shippingCity;
-        public string ShippingCity { get => shippingCity; set { shippingCity = value; OnPropertyChanged(); } }
-
-
-        private int shippingZip;
-        public int ShippingZip { get => shippingZip; set { shippingZip = value; OnPropertyChanged(); } }
-
-
-        private string shippingAddress;
-        public string ShippingAddress { get => shippingAddress; set { shippingAddress = value; OnPropertyChanged(); } }
-
-
-        private string billingCity;
-        public string BillingCity { get => billingCity; set { billingCity = value; OnPropertyChanged(); } }
-
-
-        private int billingZip;
-        public int BillingZip { get => billingZip; set { billingZip = value; OnPropertyChanged(); } }
-
-
-        private string billingAddress;
-        public string BillingAddress { get => billingAddress; set { billingAddress = value; OnPropertyChanged(); } }
-
-
-        public ICommand SaveCommand { get; }
-
-        public EditAddressesViewModel(UsersClass user)
+    private async void LoadAddresses()
+    {
+        try
         {
-            _user = user;
+            var addresses = await App.Server.GetUserAddresses(_user.Id);
 
-            SaveCommand = new RelayCommand(SaveAddresses);
-
-            LoadAddresses();
-        }
-
-        private async void SaveAddresses()
-        {
-            try
+            if (addresses != null)
             {
-                bool shipping = await App.Server.EditAddress(ShippingCity, ShippingZip, ShippingAddress);
-                bool billing = await App.Server.EditBillingAddress(BillingCity, BillingZip, BillingAddress);
+                if (addresses.shipping.Count > 0)
+                {
+                    ShippingCity = addresses.shipping[0].City;
+                    ShippingZip = addresses.shipping[0].Zip;
+                    ShippingAddress = addresses.shipping[0].Address1;
+                }
 
-                if (shipping && billing)
+                if (addresses.billing.Count > 0)
                 {
-                    MessageBox.Show("Addresses updated successfully");
+                    BillingCity = addresses.billing[0].City;
+                    BillingZip = addresses.billing[0].Zip;
+                    BillingAddress = addresses.billing[0].Address1;
                 }
-                else
-                {
-                    MessageBox.Show("Failed to update one or more addresses");
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Error updating addresses");
+
+                OnPropertyChanged(nameof(ShippingCity));
+                OnPropertyChanged(nameof(ShippingZip));
+                OnPropertyChanged(nameof(ShippingAddress));
+                OnPropertyChanged(nameof(BillingCity));
+                OnPropertyChanged(nameof(BillingZip));
+                OnPropertyChanged(nameof(BillingAddress));
             }
         }
-
-        private async void LoadAddresses()
+        catch
         {
-            try
-            {
-                var addresses = await App.Server.GetUserAddresses(_user.Id);
-
-                if (addresses != null)
-                {
-                    if (addresses.shipping.Count > 0)
-                    {
-                        ShippingCity = addresses.shipping[0].City;
-                        ShippingZip = addresses.shipping[0].Zip;
-                        ShippingAddress = addresses.shipping[0].Address1;
-                    }
-
-                    if (addresses.billing.Count > 0)
-                    {
-                        BillingCity = addresses.billing[0].City;
-                        BillingZip = addresses.billing[0].Zip;
-                        BillingAddress = addresses.billing[0].Address1;
-                    }
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Failed to load addresses");
-            }
+            MessageBox.Show("Failed to load addresses");
         }
     }
 }

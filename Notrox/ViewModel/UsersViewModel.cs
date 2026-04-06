@@ -27,6 +27,7 @@ namespace Notrox.ViewModel
             UsersView = CollectionViewSource.GetDefaultView(Users);
             UsersView.Filter = FilterUsers;
 
+
             LoadUsers();
             
             EditAddresses = new RelayCommand<UsersClass>(OpenEditAddressesF);
@@ -48,7 +49,10 @@ namespace Notrox.ViewModel
         private void OpenEditAddressesF(UsersClass user)
         {
             EditAddressesWindow window = new EditAddressesWindow(user);
-            window.ShowDialog();
+            if (window.ShowDialog() == true)
+            {
+                LoadUsers();
+            }
         }
 
         private async void DeleteUserFunction(UsersClass user)

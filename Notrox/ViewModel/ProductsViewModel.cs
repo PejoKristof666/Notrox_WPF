@@ -35,7 +35,7 @@ namespace Notrox.ViewModel
             DeleteProduct = new RelayCommand<ProductsClass>(DeleteProductF);
         }
 
-        private async void LoadProducts()
+        public async void LoadProducts()
         {
             var products = await App.Server.ListProducts();
 
@@ -47,7 +47,11 @@ namespace Notrox.ViewModel
         private void OpenEditProductsF(ProductsClass product)
         {
             EditProductsWindow window = new EditProductsWindow(product);
-            window.ShowDialog();
+
+            if (window.ShowDialog() == true)
+            {
+                LoadProducts();
+            }
         }
 
         private async void DeleteProductF(ProductsClass product)

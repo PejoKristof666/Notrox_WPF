@@ -30,7 +30,7 @@ namespace Notrox.ViewModel
         public int SelectedCompanyId { get => _selectedcompanyid; set { _selectedcompanyid = value; OnPropertyChanged(); } }
         public string IMGURL { get => _imgurl; set { _imgurl  = value; OnPropertyChanged(); } }
 
-        public AsyncRelayCommand CreateProduct { get; }
+        public AsyncRelayCommand<Window> CreateProduct { get; }
 
         public AddProductViewModel()
         {
@@ -46,10 +46,10 @@ namespace Notrox.ViewModel
                 new CompanyClass { Id = 7, Name = "ASUS" }
             };
 
-            CreateProduct = new AsyncRelayCommand(CreateProductF);
+            CreateProduct = new AsyncRelayCommand<Window>(CreateProductF);
         }
 
-        private async Task CreateProductF()
+        private async Task CreateProductF(Window window)
         {
             var success = await App.Server.AddProduct(
                 ProductName,
@@ -63,6 +63,9 @@ namespace Notrox.ViewModel
             if (success)
             {
                 MessageBox.Show("Product created!");
+                window.DialogResult = true;
+                window.Close();
+
             }
             else
             {

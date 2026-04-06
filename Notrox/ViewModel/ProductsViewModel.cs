@@ -58,7 +58,7 @@ namespace Notrox.ViewModel
         {
             if (product == null) return;
 
-            var result = MessageBox.Show($"Delete product {product.Name}?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show($"Termék törlése: {product.Name}?", "Biztos törölni akarod?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result != MessageBoxResult.Yes) return;
 
@@ -71,7 +71,7 @@ namespace Notrox.ViewModel
 
             else
             {
-                MessageBox.Show("Failed Delete / Product");
+                MessageBox.Show("Sikertelen törlés");
             }
         }
 

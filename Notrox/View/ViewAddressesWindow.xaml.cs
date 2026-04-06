@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace Notrox.View
 {
     /// <summary>
-    /// Interaction logic for EditAddressesWindow.xaml
+    /// Interaction logic for ViewAddressesWindow.xaml
     /// </summary>
-    public partial class EditAddressesWindow : Window
+    public partial class ViewAddressesWindow : Window
     {
-        public EditAddressesWindow(UsersClass user)
+        public ViewAddressesWindow(UsersClass user)
         {
             InitializeComponent();
-            DataContext = new EditAddressesViewModel(user);
+            DataContext = new ViewAddressesViewModel(user);
         }
     }
 }

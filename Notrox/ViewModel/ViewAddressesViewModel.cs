@@ -3,7 +3,7 @@ using Notrox.Model;
 using Notrox.ViewModel;
 using System.Windows;
 
-public class EditAddressesViewModel : ViewModelBase
+public class ViewAddressesViewModel : ViewModelBase
 {
     private UsersClass _user;
 
@@ -15,7 +15,7 @@ public class EditAddressesViewModel : ViewModelBase
     public int BillingZip { get; set; }
     public string BillingAddress { get; set; }
 
-    public EditAddressesViewModel(UsersClass user)
+    public ViewAddressesViewModel(UsersClass user)
     {
         _user = user;
         LoadAddresses();
@@ -53,7 +53,7 @@ public class EditAddressesViewModel : ViewModelBase
         }
         catch
         {
-            MessageBox.Show("Failed to load addresses");
+            MessageBox.Show("Nem sikerült betölteni a címeket");
         }
     }
 }

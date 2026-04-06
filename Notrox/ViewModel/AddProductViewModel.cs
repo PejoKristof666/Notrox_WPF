@@ -62,14 +62,14 @@ namespace Notrox.ViewModel
 
             if (success)
             {
-                MessageBox.Show("Product created!");
+                MessageBox.Show("Termék létrehozva");
                 window.DialogResult = true;
                 window.Close();
 
             }
             else
             {
-                MessageBox.Show("Failed Add / Product");
+                MessageBox.Show("Nem sikerült hozzáadni a terméket");
             }
         }
     }

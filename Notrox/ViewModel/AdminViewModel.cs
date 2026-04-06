@@ -68,7 +68,7 @@ namespace Notrox.ViewModel
         {
             if (CurrentView is not UsersViewModel usersVM)
             {
-                MessageBox.Show("You must be on the Users page to export CSV."); return;
+                MessageBox.Show("A felhasználók oldalon kell lenned hogy lementsd TXT/CSV fájlba"); return;
             }
 
             var dialog = new SaveFileDialog

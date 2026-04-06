@@ -29,12 +29,12 @@ namespace Notrox.ViewModel
 
 
             LoadUsers();
-            
-            EditAddresses = new RelayCommand<UsersClass>(OpenEditAddressesF);
+
+            ViewAddresses = new RelayCommand<UsersClass>(OpenViewAddressesF);
             DeleteUser = new RelayCommand<UsersClass>(DeleteUserFunction);
         }
 
-        public RelayCommand<UsersClass> EditAddresses { get; }
+        public RelayCommand<UsersClass> ViewAddresses { get; }
         public RelayCommand<UsersClass> DeleteUser { get; }
 
         private async void LoadUsers()
@@ -46,9 +46,9 @@ namespace Notrox.ViewModel
             foreach (var u in users) Users.Add(u);
         }
 
-        private void OpenEditAddressesF(UsersClass user)
+        private void OpenViewAddressesF(UsersClass user)
         {
-            EditAddressesWindow window = new EditAddressesWindow(user);
+            ViewAddressesWindow window = new ViewAddressesWindow(user);
             if (window.ShowDialog() == true)
             {
                 LoadUsers();
@@ -59,7 +59,7 @@ namespace Notrox.ViewModel
         {
             if (user == null) return;
 
-            var result = MessageBox.Show($"Delete user {user.Username}?","Confirm Delete",MessageBoxButton.YesNo,MessageBoxImage.Warning);
+            var result = MessageBox.Show($"Felhasználó törlése: {user.Username}?", "Biztos törölni akarod?", MessageBoxButton.YesNo,MessageBoxImage.Warning);
 
             if (result != MessageBoxResult.Yes) return;
 
@@ -71,7 +71,7 @@ namespace Notrox.ViewModel
             }
             else
             {
-                MessageBox.Show("Failed to delete user.");
+                MessageBox.Show("Sikertelen törlés");
             }
         }
 

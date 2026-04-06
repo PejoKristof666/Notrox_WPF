@@ -54,14 +54,14 @@ namespace Notrox.ViewModel
 
                 if (updateProduct)
                 {
-                    MessageBox.Show("Product updated successfully");
+                    MessageBox.Show("Termék módosítva");
                     window.DialogResult = true;
                     window.Close();
                 }
             }
             catch
             {
-                MessageBox.Show("Update Failed / Product");
+                MessageBox.Show("Sikertelen módosítás");
             }
         }
 
@@ -77,7 +77,7 @@ namespace Notrox.ViewModel
             }
             catch
             {
-                MessageBox.Show("Load Failed / Product");
+                MessageBox.Show("Betöltés sikertelen / Termék");
             }
         }
     }

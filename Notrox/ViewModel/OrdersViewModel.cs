@@ -50,11 +50,11 @@ namespace Notrox.ViewModel
                 bool success = await App.Server.EditOrder(order.Id, order.SelectedPhase);
                 if (success)
                 {
-                    MessageBox.Show($"Order #{order.Id} updated successfully!");
+                    MessageBox.Show($"Termék #{order.Id} sikeresen módosítva");
                 }
                 else
                 {
-                    MessageBox.Show($"Failed to update order #{order.Id}");
+                    MessageBox.Show($"Nem sikerült módosítani: #{order.Id}");
                 }
             });
         }

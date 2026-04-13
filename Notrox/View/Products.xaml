@@ -60,6 +60,7 @@
                                    HorizontalAlignment="Center"
                                    Margin="0 5 0 0"
                                    TextWrapping="Wrap"/>
+
                             <Button Content="🔧"
                                    Margin="5"
                                    Background="green"
@@ -67,7 +68,7 @@
                                    BorderThickness="0"
                                    Cursor="Hand"
                                    Command="{Binding DataContext.EditProduct, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                   CommandParameter="{Binding}" />
+                                   CommandParameter="{Binding}"/>
 
                             <Button Content="❌"
                                    Margin="5"

@@ -27,7 +27,11 @@ namespace Notrox.ViewModel
 
         private async Task Login(object param)
         {
-            if (param is not PasswordBox passwordBox) return;
+            if (param is not Window MainWindow) return;
+
+            var passwordBox = MainWindow.FindName("PasswordInput") as PasswordBox;
+
+            if (passwordBox == null) return;
 
             string password = passwordBox.Password;
 
@@ -57,7 +61,7 @@ namespace Notrox.ViewModel
             AdminWindow admin = new AdminWindow();
             admin.Show();
 
-            Application.Current.MainWindow.Close();
+            MainWindow.Close();
         }
     }
 }

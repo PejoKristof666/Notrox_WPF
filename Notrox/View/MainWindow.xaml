@@ -63,7 +63,7 @@
                         Cursor="Hand"
                         IsDefault="True"
                         Command="{Binding LoginCommand}"
-                        CommandParameter="{Binding ElementName=PasswordInput}"/>
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
             </StackPanel>
 
         </Border>

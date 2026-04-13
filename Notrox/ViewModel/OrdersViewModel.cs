@@ -64,7 +64,12 @@ namespace Notrox.ViewModel
 
             Orders.Clear();
 
-            foreach (var item in products) Orders.Add(item);
+            foreach (var item in products)
+            {
+                item.SelectedPhase = item.Phase;
+                Orders.Add(item);
+            }
+            
         }
     }
 }

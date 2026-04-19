@@ -13,7 +13,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
 
-                    <Border Background="Gray"
+                    <Border Background="#1E293B"
                             CornerRadius="12"
                             Padding="15"
                             HorizontalAlignment="Center"
@@ -31,7 +31,7 @@
 
                             <TextBlock Text="{Binding Id, StringFormat='{}#{0}'}"
                                        Grid.Column="0"
-                                       Foreground="Cyan"
+                                       Foreground="#3B82F6"
                                        VerticalAlignment="Center"
                                        Padding="0 17 0 0"
                                        Width="100"
@@ -40,7 +40,7 @@
 
                             <TextBlock Text="{Binding Date}"
                                        Grid.Column="1"
-                                       Foreground="White"
+                                       Foreground="#94A3B8"
                                        FontWeight="Bold"
                                        VerticalAlignment="Center"
                                        Padding="0 0 0 0"
@@ -60,6 +60,8 @@
 
                             <ComboBox ItemsSource="{Binding DataContext.Chooses, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                       SelectedItem="{Binding SelectedPhase, Mode=TwoWay}"
+                                      Background="#334155"
+                                      Foreground="#1E293B"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Stretch"
                                       Grid.Column="3"

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notrox", "Notrox\Notrox.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notrox_WPF_Test", "Notrox_WPF_Test\Notrox_WPF_Test.csproj", "{CCDF3856-2644-4301-ACBF-4670DA2C26F0}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NotroxSetup", "NotroxSetup\NotroxSetup.vdproj", "{E0603389-9142-5FDE-B29F-755763EC83DA}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Notrox_Setup", "Notrox_Setup\Notrox_Setup.vdproj", "{773CF106-E40B-8F90-671B-62DEB00DCBFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,8 +23,8 @@ Global
 		{CCDF3856-2644-4301-ACBF-4670DA2C26F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCDF3856-2644-4301-ACBF-4670DA2C26F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCDF3856-2644-4301-ACBF-4670DA2C26F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0603389-9142-5FDE-B29F-755763EC83DA}.Debug|Any CPU.ActiveCfg = Debug
-		{E0603389-9142-5FDE-B29F-755763EC83DA}.Release|Any CPU.ActiveCfg = Release
+		{773CF106-E40B-8F90-671B-62DEB00DCBFC}.Debug|Any CPU.ActiveCfg = Debug
+		{773CF106-E40B-8F90-671B-62DEB00DCBFC}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
